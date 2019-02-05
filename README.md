@@ -57,4 +57,4 @@ Type `tweet-bot -h` for options.
 
 ## License
 
-MIT © [Diablohu](https://diablohu.com)
+MIT © [Diablohu](http://diablohu.com)
