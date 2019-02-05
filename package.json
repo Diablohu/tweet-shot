@@ -1,0 +1,46 @@
+{
+    "name": "tweet-shot",
+    "version": "0.1.0-alpha.1",
+    "description": "Take a screenshot of a tweet and download all media from it",
+    "main": "./src/tweet-shot.js",
+    "sideEffects": false,
+    "bin": {
+        "tweet-shot": "./bin/tweet-shot.js"
+    },
+    "scripts": {
+        "eslint": "eslint \"!(node_modules)/**/*.+(js|jsx)\"",
+        "test": "jest"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Diablohu/tweet-shot"
+    },
+    "keywords": [
+        "node.js",
+        "twitter"
+    ],
+    "license": "Apache-2.0",
+    "author": {
+        "name": "diablohu",
+        "email": "diablohudream@gmail.com",
+        "url": "http://diablohu.com"
+    },
+    "bugs": {
+        "url": "https://github.com/Diablohu/tweet-shot/issues"
+    },
+    "engines": {
+        "node": ">=8.0.0"
+    },
+    "dependencies": {
+        "commander": "2.19.0",
+        "download": "7.1.0",
+        "fs-extra": "7.0.1",
+        "ora": "3.0.0",
+        "puppeteer": "1.11.0"
+    },
+    "devDependencies": {
+        "babel-eslint": "10.0.1",
+        "eslint": "5.13.0",
+        "jest": "24.0.0"
+    }
+}
