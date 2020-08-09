@@ -1,4 +1,5 @@
 # tweet-shot
+
 Take a screenshot of a tweet and download all media from it
 
 ## Install
@@ -14,11 +15,11 @@ const tweetShot = require('tweet-shot');
 
 const main = async () => {
     // ...
-    await tweetShot('https://twitter.com/Diablohu/status/1092414659057967104')
+    await tweetShot('https://twitter.com/Diablohu/status/1092414659057967104');
     // ...
 };
 
-main()
+main();
 ```
 
 #### API
@@ -46,6 +47,12 @@ Destination directory. Default to current working directory.
 Type: `String`
 
 Proxy server URL.
+
+##### options.scale
+
+Type: `Number`
+
+Page scale number. Default value `1`.
 
 ## Usage (CLI)
 
