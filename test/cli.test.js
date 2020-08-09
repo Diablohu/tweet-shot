@@ -10,9 +10,13 @@ const { spawn } = require('child_process');
 const parseTweetUrl = require('../src/parse-tweet-url');
 
 const testUrls = [
+    'https://twitter.com/Diablohu/status/1290887385484414976', // no media
+    'https://twitter.com/caidychenkd/status/1092741766623592449', // 1 pic
     'https://twitter.com/rint_rnt/status/1092121977442029568', // 2 pics
+    'https://twitter.com/Diablohu/status/1292423780438966280', // 4 pics
     'https://twitter.com/Strangestone/status/1092196348001054720', // in thread
-    'https://twitter.com/caidychenkd/status/1092741766623592449', // normal
+    'https://twitter.com/Diablohu/status/1292433453414150148', // 1 video
+    'https://twitter.com/Diablohu/status/1292431619475693569', // retweet 1 pic
 ];
 const dirTestResults = path.resolve(__dirname, './test-results');
 

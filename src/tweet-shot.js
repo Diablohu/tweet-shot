@@ -171,10 +171,10 @@ const tweetShot = async (url, options = {}) => {
         },
         { selectorThumbnails, getElTweet }
     );
-    if (!thumbnails.length) {
-        await browser.close();
-        return false;
-    }
+    // if (!thumbnails.length) {
+    //     await browser.close();
+    //     return false;
+    // }
 
     // 下载全图
     {
