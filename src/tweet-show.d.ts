@@ -14,8 +14,10 @@ export interface Options {
     /** 设置页面缩放值，默认为 `1` */
     scale?: number;
 
+    /** JPEG 品质 / JPEG Quality */
     quality?: number;
 
+    /** 是否使用暗色模式 / Using Dark Mode */
     darkMode?: boolean;
 }
 

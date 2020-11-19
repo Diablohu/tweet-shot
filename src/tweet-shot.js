@@ -22,11 +22,11 @@ const sleep = async (ms) =>
  * @param {string} url 推文 URL
  * @param {Object} options
  * @param {boolean} [options.headless=true]
- * @param {boolean} [options.darkMode=false]
+ * @param {boolean} [options.darkMode=false] 是否使用暗色模式 / Using Dark Mode
  * @param {string} [options.proxy] 设置代理服务器连接。默认没有代理
  * @param {string} [options.dest] 设置存储目录。默认为当前工作目录
  * @param {number} [options.scale=1] 页面缩放值
- * @param {number} [options.quality=1]
+ * @param {number} [options.quality=60] JPEG 品质 / JPEG Quality
  */
 const tweetShot = async (url, options = {}) => {
     if (!url) throw new Error('missing parameter: url');
