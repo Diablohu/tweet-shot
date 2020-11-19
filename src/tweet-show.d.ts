@@ -13,6 +13,10 @@ export interface Options {
 
     /** 设置页面缩放值，默认为 `1` */
     scale?: number;
+
+    quality?: number;
+
+    darkMode?: boolean;
 }
 
 export interface Result {

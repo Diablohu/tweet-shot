@@ -12,6 +12,8 @@ program
     .option('--dest <destination-path>', 'Set destination directory')
     .option('--proxy <proxy-url>', 'Set proxy url')
     .option('--scale <scale-number>', 'Set scale')
+    .option('--quality <quality-number>', 'Set quality', parseInt)
+    .option('--dark-mode', 'Set dark mode in browser')
     .parse(process.argv);
 
 const spinner = (text) => {
@@ -25,14 +27,20 @@ const spinner = (text) => {
 };
 
 const run = async () => {
-    const { url, dest, proxy, scale } = program;
+    const { url, dest, proxy, scale, quality, darkMode } = program;
 
     const stepName = `[tweet-shot] downloading ${url}`;
     const step = spinner(`${stepName}...`);
 
     step.start();
     try {
-        await tweetShot(url, { dest, proxy, scale });
+        await tweetShot(url, {
+            dest,
+            proxy,
+            scale,
+            quality,
+            darkMode,
+        });
         step.stop();
         spinner(stepName).succeed();
     } catch (e) {
