@@ -22,31 +22,36 @@ const sleep = async (ms) =>
  * @param {string} url 推文 URL
  * @param {Object} options
  * @param {boolean} [options.headless=true]
+ * @param {boolean} [options.darkMode=false]
  * @param {string} [options.proxy] 设置代理服务器连接。默认没有代理
  * @param {string} [options.dest] 设置存储目录。默认为当前工作目录
  * @param {number} [options.scale=1] 页面缩放值
+ * @param {number} [options.quality=1]
  */
 const tweetShot = async (url, options = {}) => {
     if (!url) throw new Error('missing parameter: url');
 
     const {
         headless = true,
+        darkMode = false,
         proxy = undefined,
         dest = defaultDest,
         scale = 1,
+        quality = 60,
     } = options;
 
     if (isNaN(scale)) console.warn(`'scale' invalid. reset to 1`);
 
     await fs.ensureDir(dest);
 
+    const darkString = darkMode ? '_dark' : '';
     const deviceScaleFactor = parseFloat(scale);
 
     // 分析推文URL
     const { userId, tweetId } = parseTweetUrl(url);
 
     // 检查是否已下载
-    const resultFilename = `${userId}-${tweetId}.json`;
+    const resultFilename = `${userId}-${tweetId}${darkString}.json`;
     const resultPathname = path.resolve(dest, resultFilename);
     if (fs.existsSync(resultPathname)) return await fs.readJSON(resultPathname);
 
@@ -54,7 +59,7 @@ const tweetShot = async (url, options = {}) => {
     const tweetUrl = `https://mobile.twitter.com/${userId}/status/${tweetId}`;
     // const url = `https://youtube.com`
     const result = {
-        screenshot: `${userId}-${tweetId}_.jpg`,
+        screenshot: `${userId}-${tweetId}_${darkString}.jpg`,
         assets: [],
     };
     const puppeteerOptions = {
@@ -73,6 +78,12 @@ const tweetShot = async (url, options = {}) => {
     // 启动 Puppeteer
     const browser = await puppeteer.launch(puppeteerOptions);
     const page = await browser.newPage();
+    await page.emulateMediaFeatures([
+        {
+            name: 'prefers-color-scheme',
+            value: darkMode ? 'dark' : 'light',
+        },
+    ]);
     await page.setDefaultNavigationTimeout(0);
     await page.goto(tweetUrl, {
         waitUntil: 'networkidle0',
@@ -202,7 +213,7 @@ const tweetShot = async (url, options = {}) => {
                 ({ filename, format }, index) =>
                     new Promise(async (resolve, reject) => {
                         const downloadUrl = `${thumbnailUrlStartWith}${filename}.${format}:orig`;
-                        const destFilename = `${userId}-${tweetId}-${index}-${filename}.${format}`;
+                        const destFilename = `${userId}-${tweetId}-${index}-${filename}${darkString}.${format}`;
                         const destPathname = path.resolve(dest, destFilename);
                         result.assets[index] = {
                             url: downloadUrl,
@@ -304,7 +315,7 @@ const tweetShot = async (url, options = {}) => {
         await page.screenshot({
             path: path.resolve(dest, result.screenshot),
             type: 'jpeg',
-            quality: 60,
+            quality: quality,
             clip: {
                 x: 0,
                 y: rect.offsetTop,

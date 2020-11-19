@@ -54,6 +54,18 @@ Type: `Number`
 
 Page scale number. Default value `1`.
 
+##### options.darkMode
+
+Type: `Boolean`
+
+Whether or not to tell the browser to use dark mode. Default value `false`.
+
+##### options.quality
+
+Type: `Number`
+
+JPEG image quality (0-100). Default value `60`.
+
 ## Usage (CLI)
 
 ```bash
