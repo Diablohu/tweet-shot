@@ -69,10 +69,10 @@ JPEG image quality (0-100). Default value `60`.
 ## Usage (CLI)
 
 ```bash
-tweet-bot --url https://twitter.com/Diablohu/status/1092414659057967104
+tweet-shot --url https://twitter.com/Diablohu/status/1092414659057967104
 ```
 
-Type `tweet-bot -h` for options.
+Type `tweet-shot -h` for options.
 
 ## License
 
