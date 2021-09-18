@@ -1,15 +1,17 @@
 {
     "name": "tweet-shot",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "description": "Take a screenshot of a tweet and download all media from it",
     "main": "./src/tweet-shot.js",
     "sideEffects": false,
+    "type": "module",
     "bin": {
         "tweet-shot": "./bin/tweet-shot.js"
     },
     "scripts": {
         "eslint": "eslint \"!(node_modules)/**/*.+(js|jsx)\"",
-        "test": "jest",
+        "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
+        "prepare": "husky install",
         "up": "yarn upgrade-interactive --latest"
     },
     "repository": {
@@ -33,23 +35,24 @@
         "node": ">=10.0.0"
     },
     "dependencies": {
-        "commander": "6.0.0",
+        "commander": "8.2.0",
         "download": "8.0.0",
-        "fs-extra": "9.0.1",
-        "ora": "5.0.0",
-        "puppeteer": "5.2.1",
+        "fs-extra": "10.0.0",
+        "ora": "6.0.1",
+        "puppeteer": "10.2.0",
         "tunnel": "^0.0.6"
     },
     "devDependencies": {
         "babel-eslint": "10.1.0",
-        "eslint": "^7.6.0",
-        "eslint-config-koot": "^1.7.1",
-        "husky": "^4.2.5",
-        "jest": "26.2.2",
-        "lint-staged": "^10.2.11",
-        "prettier": "^2.0.5",
-        "prettier-eslint": "^11.0.0",
-        "react": "^16.13.1"
+        "cross-env": "^7.0.3",
+        "eslint": "^7.32.0",
+        "eslint-config-koot": "^3.1.1",
+        "husky": "^7.0.2",
+        "jest": "27.2.0",
+        "lint-staged": "^11.1.2",
+        "prettier": "^2.4.1",
+        "prettier-eslint": "^13.0.0",
+        "react": "^17.0.2"
     },
     "husky": {
         "hooks": {

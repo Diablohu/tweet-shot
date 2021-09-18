@@ -1,14 +1,13 @@
-// jest configuration
-jest.setTimeout(10 * 60 * 1000); // 10 mins
+import fs from 'fs-extra';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { spawn } from 'child_process';
+
+import parseTweetUrl from '../src/parse-tweet-url.js';
 
 //
 
-const fs = require('fs-extra');
-const path = require('path');
-const { spawn } = require('child_process');
-
-const parseTweetUrl = require('../src/parse-tweet-url');
-
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const testUrls = [
     'https://twitter.com/Diablohu/status/1290887385484414976', // no media
     'https://twitter.com/caidychenkd/status/1092741766623592449', // 1 pic
@@ -17,6 +16,7 @@ const testUrls = [
     'https://twitter.com/Strangestone/status/1092196348001054720', // in thread
     'https://twitter.com/Diablohu/status/1292433453414150148', // 1 video
     'https://twitter.com/Diablohu/status/1292431619475693569', // retweet 1 pic
+    'https://twitter.com/kakage0904/status/1438263434357850114', // NSFW 1 pic
 ];
 const dirTestResults = path.resolve(__dirname, './test-results');
 
@@ -24,6 +24,10 @@ describe('tweet-shot', () => {
     for (const url of testUrls) {
         test(`Tweet: ${url}`, async () => {
             const { userId, tweetId } = parseTweetUrl(url);
+
+            expect(typeof userId).toBe('string');
+            expect(typeof tweetId).toBe('string');
+
             // console.log(
             //     'node ' +
             //         [
@@ -33,9 +37,10 @@ describe('tweet-shot', () => {
             //             '--dest',
             //             dirTestResults,
             //             '--proxy',
-            //             'socks5://127.0.0.1:10808',
+            //             'socks5://127.0.0.1:10807',
             //         ].join(' ')
             // );
+
             await new Promise((resolve) => {
                 const child = spawn(
                     'node',

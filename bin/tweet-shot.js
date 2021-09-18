@@ -1,12 +1,23 @@
 #!/usr/bin/env node
 
-const program = require('commander');
-const ora = require('ora');
-const spinners = require('cli-spinners');
-const tweetShot = require('../src/tweet-shot');
+import fs from 'fs-extra';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import program from 'commander';
+import ora from 'ora';
+import spinners from 'cli-spinners';
+
+import tweetShot from '../src/tweet-shot.js';
+
+const pkg = fs.readJsonSync(
+    path.resolve(
+        path.dirname(fileURLToPath(import.meta.url)),
+        '../package.json'
+    )
+);
 
 program
-    .version(require('../package').version, '-v, --version')
+    .version(pkg.version, '-v, --version')
     .usage('[options]')
     .option('--url <url-of-tweet>', 'Set url of tweet')
     .option('--dest <destination-path>', 'Set destination directory')
@@ -27,7 +38,7 @@ const spinner = (text) => {
 };
 
 const run = async () => {
-    const { url, dest, proxy, scale, quality, darkMode } = program;
+    const { url, dest, proxy, scale, quality, darkMode } = program.opts();
 
     const stepName = `[tweet-shot] downloading ${url}`;
     const step = spinner(`${stepName}...`);

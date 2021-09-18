@@ -1,6 +1,6 @@
 # tweet-shot
 
-Take a screenshot of a tweet and download all media from it
+Take a screenshot of a tweet and download all media from it.
 
 ## Install
 
@@ -11,7 +11,7 @@ npm i tweet-shot
 ## Usage (Programmatically)
 
 ```javascript
-const tweetShot = require('tweet-shot');
+import tweetShot from 'tweet-shot';
 
 const main = async () => {
     // ...

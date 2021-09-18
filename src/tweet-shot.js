@@ -1,10 +1,10 @@
-const fs = require('fs-extra');
-const path = require('path');
-const puppeteer = require('puppeteer');
-const download = require('download');
-const tunnel = require('tunnel');
+import fs from 'fs-extra';
+import path from 'path';
+import puppeteer from 'puppeteer';
+import download from 'download';
+import tunnel from 'tunnel';
 
-const parseTweetUrl = require('./parse-tweet-url.js');
+import parseTweetUrl from './parse-tweet-url.js';
 
 const thumbnailUrlStartWith = `https://pbs.twimg.com/media/`;
 const defaultDest = process.cwd();
@@ -155,11 +155,14 @@ const tweetShot = async (url, options = {}) => {
             ({ getElTweet }) => {
                 const tweet = window[getElTweet]();
                 if (!tweet) return;
-                const link = tweet.querySelector('a[href="/settings/safety"]');
+                const link =
+                    tweet.querySelector('a[href="/settings/safety"]') ||
+                    tweet.querySelector('a[href="/settings/content_you_see"]');
                 if (!link) return;
-                const buttons = link.parentNode.parentNode.parentNode.querySelectorAll(
-                    'div[role="button"]'
-                );
+                const buttons =
+                    link.parentNode.parentNode.parentNode.querySelectorAll(
+                        'div[role="button"]'
+                    );
                 if (buttons.length) {
                     buttons[0].click();
                     return true;
@@ -292,12 +295,8 @@ const tweetShot = async (url, options = {}) => {
                 const elFirstTweet = document.querySelectorAll('article')[0];
 
                 // 获取位置
-                const {
-                    top,
-                    left,
-                    height,
-                    width,
-                } = elTweet.getBoundingClientRect();
+                const { top, left, height, width } =
+                    elTweet.getBoundingClientRect();
                 const offsetTop = elFirstTweet.getBoundingClientRect().top;
 
                 // 重置滚动条
@@ -334,4 +333,4 @@ const tweetShot = async (url, options = {}) => {
     return result;
 };
 
-module.exports = tweetShot;
+export default tweetShot;

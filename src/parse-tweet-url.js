@@ -1,8 +1,8 @@
-const twitterBaseUrl = `https://mobile.twitter.com/`
+const twitterBaseUrl = `https://mobile.twitter.com/`;
 
 /**
  * @typedef {Object} TweetInfos
- * @property {String} userId 
+ * @property {String} userId
  * @property {String} tweetId
  */
 /**
@@ -13,16 +13,18 @@ const twitterBaseUrl = `https://mobile.twitter.com/`
 const parseTweetUrl = (url) => {
     const fullUrl = /(?:^[a-z][a-z0-9+.-]*:|\/\/)/i.test(url)
         ? new URL(url)
-        : new URL(url, twitterBaseUrl)
+        : new URL(url, twitterBaseUrl);
     // https://twitter.com/pockyfactory/status/1092296548346519552
-    const matches = /\/([a-zA-Z0-9-_]+)\/status\/([0-9]+)/.exec(fullUrl.pathname)
+    const matches = /\/([a-zA-Z0-9-_]+)\/status\/([0-9]+)/.exec(
+        fullUrl.pathname
+    );
     if (!Array.isArray(matches) || matches.length < 2) {
-        throw new Error('invalid url input')
+        throw new Error('invalid url input');
     }
     return {
         userId: matches[1],
-        tweetId: matches[2]
-    }
-}
+        tweetId: matches[2],
+    };
+};
 
-module.exports = parseTweetUrl
+export default parseTweetUrl;
